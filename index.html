@@ -1,0 +1,1305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0f1e">
+<meta name="description" content="B2B Email Marketing Expert - Interactive Learning PWA">
+<title>B2B Email Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --fs-xs: 11px;
+  --fs-sm: 13px;
+  --fs-md: 16px;
+  --fs-lg: 24px;
+  --space: 8px;
+  --bg: #0a0f1e;
+  --card: #111827;
+  --card2: #1a2340;
+  --border: #1e2d4a;
+  --border2: #253554;
+  --accent: #3b82f6;
+  --accent2: #6366f1;
+  --accent3: #06b6d4;
+  --green: #10b981;
+  --amber: #f59e0b;
+  --red: #ef4444;
+  --text: #f0f4ff;
+  --text2: #94a3b8;
+  --text3: #64748b;
+  --nav-h: 64px;
+  --radius: 12px;
+  --radius2: 8px;
+  --shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{font-size:16px;scroll-behavior:smooth;}
+body{font-family:var(--font-body);font-size:var(--fs-md);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--border2);border-radius:4px;}
+*:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:4px;}
+#app{max-width:480px;margin:0 auto;min-height:100vh;position:relative;}
+
+/* Header */
+.app-header{position:sticky;top:0;z-index:50;background:rgba(10,15,30,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:calc(var(--space)*2) calc(var(--space)*3);display:flex;align-items:center;justify-content:space-between;}
+.app-logo{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;background:linear-gradient(135deg,var(--accent),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.xp-pill{display:flex;align-items:center;gap:6px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);border-radius:20px;padding:4px 12px;}
+.xp-label{font-size:var(--fs-xs);font-weight:700;color:var(--accent);font-family:var(--font-display);}
+.xp-val{font-size:var(--fs-xs);font-weight:800;color:#fff;font-family:var(--font-display);}
+
+/* Sections */
+.section{display:none;padding:calc(var(--space)*3) calc(var(--space)*2.5);padding-bottom:calc(var(--nav-h) + var(--space)*4);animation:fadeUp .3s ease;}
+.section.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.07)}100%{transform:scale(1)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* Cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:calc(var(--space)*2.5);margin-bottom:calc(var(--space)*2);box-shadow:var(--shadow);}
+.card-accent{border-color:var(--accent);border-left:3px solid var(--accent);}
+.card-green{border-color:var(--green);border-left:3px solid var(--green);}
+.card-amber{border-color:var(--amber);border-left:3px solid var(--amber);}
+
+/* Typography */
+.section-title{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:700;margin-bottom:calc(var(--space)*3);color:var(--text);}
+.section-title span{color:var(--accent3);}
+.card-title{font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;margin-bottom:var(--space);color:var(--text);}
+.label{font-size:var(--fs-xs);font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--text3);}
+.body-sm{font-size:var(--fs-sm);color:var(--text2);line-height:1.65;}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#0f1d3d 0%,#0a1628 50%,#050a18 100%);border:1px solid var(--border);border-radius:var(--radius);padding:calc(var(--space)*4);margin-bottom:calc(var(--space)*2);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,.15) 0%,transparent 70%);border-radius:50%;}
+.hero-title{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;line-height:1.2;margin-bottom:var(--space);position:relative;z-index:1;}
+.hero-sub{font-size:var(--fs-sm);color:var(--text2);line-height:1.6;position:relative;z-index:1;}
+.tag{display:inline-flex;align-items:center;font-size:var(--fs-xs);font-weight:600;padding:4px 8px;border-radius:20px;margin:4px 4px 0 0;}
+.tag-blue{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.3);}
+.tag-green{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.tag-purple{background:rgba(99,102,241,.15);color:#a5b4fc;border:1px solid rgba(99,102,241,.3);}
+
+/* Lists */
+.role-list,.check-list{list-style:none;display:flex;flex-direction:column;gap:var(--space);}
+.role-list li,.check-list li{display:flex;align-items:flex-start;gap:var(--space);font-size:var(--fs-sm);color:var(--text2);line-height:1.5;}
+.role-list li::before{content:'→';color:var(--accent3);font-weight:700;flex-shrink:0;}
+.check-list li::before{content:'✔';color:var(--green);font-weight:700;flex-shrink:0;}
+
+/* Stats */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space);margin-bottom:calc(var(--space)*2);}
+.stat-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:calc(var(--space)*2);text-align:center;}
+.stat-num{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;color:var(--accent);}
+.stat-label{font-size:var(--fs-xs);color:var(--text3);margin-top:4px;}
+
+/* Skills */
+.skill-item{display:flex;align-items:center;justify-content:space-between;margin-bottom:calc(var(--space)*2);}
+.skill-name{font-size:var(--fs-sm);font-weight:500;color:var(--text);flex:1;}
+.skill-bar{flex:2;height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:0 var(--space);}
+.skill-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,var(--accent),var(--accent3));transition:width 1s ease;}
+.skill-pct{font-size:var(--fs-xs);font-weight:700;color:var(--accent);width:32px;text-align:right;}
+
+/* Learn cards */
+.learn-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:calc(var(--space)*1.5);transition:border-color .3s;}
+.learn-card.passed{border-color:var(--green);}
+.learn-toggle{display:flex;align-items:center;padding:calc(var(--space)*2) calc(var(--space)*2.5);cursor:pointer;min-height:56px;background:none;border:none;width:100%;color:var(--text);text-align:left;transition:background .2s;gap:var(--space);}
+.learn-toggle:hover{background:rgba(255,255,255,.03);}
+.learn-step{font-size:var(--fs-xs);font-weight:700;color:var(--accent3);flex-shrink:0;width:24px;}
+.learn-toggle-title{font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;flex:1;}
+.learn-status{font-size:16px;flex-shrink:0;}
+.learn-arrow{color:var(--text3);transition:transform .3s;font-size:var(--fs-sm);flex-shrink:0;}
+.learn-card.open .learn-arrow{transform:rotate(180deg);}
+.learn-body{display:none;padding:0 calc(var(--space)*2.5) calc(var(--space)*2.5);}
+.learn-card.open .learn-body{display:block;}
+.learn-content{font-size:var(--fs-sm);color:var(--text2);line-height:1.7;margin-bottom:calc(var(--space)*2.5);padding-top:calc(var(--space)*2);border-top:1px solid var(--border);}
+
+/* Quiz */
+.quiz-area{background:rgba(59,130,246,.05);border:1px solid rgba(59,130,246,.15);border-radius:var(--radius2);padding:calc(var(--space)*2);}
+.quiz-q{font-size:var(--fs-sm);font-weight:500;color:var(--text);margin-bottom:calc(var(--space)*1.5);line-height:1.5;}
+.quiz-q span{color:var(--accent3);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.06em;display:block;margin-bottom:4px;}
+.quiz-options{display:flex;flex-direction:column;gap:var(--space);}
+.quiz-opt{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);padding:calc(var(--space)*1.5) calc(var(--space)*2);font-size:var(--fs-sm);color:var(--text2);cursor:pointer;min-height:44px;text-align:left;width:100%;font-family:var(--font-body);transition:all .2s;display:flex;align-items:center;gap:var(--space);}
+.quiz-opt:hover:not(:disabled){border-color:var(--accent);color:var(--text);background:rgba(59,130,246,.08);}
+.quiz-opt.correct{border-color:var(--green);background:rgba(16,185,129,.1);color:#34d399;animation:pop .3s ease;}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(239,68,68,.1);color:#f87171;animation:shake .3s ease;}
+.quiz-opt.reveal{border-color:var(--green);background:rgba(16,185,129,.06);color:#34d399;}
+.quiz-opt:disabled{cursor:not-allowed;}
+.quiz-feedback{margin-top:calc(var(--space)*1.5);font-size:var(--fs-sm);line-height:1.6;padding:calc(var(--space)*1.5);border-radius:var(--radius2);display:none;}
+.quiz-feedback.show{display:block;}
+.quiz-feedback.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);color:#6ee7b7;}
+.quiz-feedback.bad{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5;}
+
+/* Progress */
+.progress-track{background:var(--border);border-radius:4px;height:8px;margin-bottom:calc(var(--space)*2);overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent3));border-radius:4px;transition:width .5s ease;}
+.progress-meta{display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--space);}
+
+/* Forms */
+.form-group{margin-bottom:calc(var(--space)*2.5);}
+.form-label{font-size:var(--fs-sm);font-weight:500;color:var(--text2);margin-bottom:var(--space);display:block;}
+.form-input{width:100%;min-height:48px;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);color:var(--text);font-family:var(--font-body);font-size:var(--fs-sm);padding:calc(var(--space)*1.5) calc(var(--space)*2);transition:border-color .2s,box-shadow .2s;outline:none;}
+.form-input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.2);}
+.form-select-wrap{position:relative;}
+.form-select{width:100%;min-height:48px;background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);color:var(--text);font-family:var(--font-body);font-size:var(--fs-sm);padding:calc(var(--space)*1.5) calc(var(--space)*5) calc(var(--space)*1.5) calc(var(--space)*2);appearance:none;-webkit-appearance:none;cursor:pointer;outline:none;transition:border-color .2s,box-shadow .2s;}
+.form-select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.2);}
+.form-select option{background:var(--card2);color:var(--text);}
+.select-arrow{position:absolute;right:calc(var(--space)*2);top:50%;transform:translateY(-50%);pointer-events:none;color:var(--text3);}
+
+/* Toggle */
+.toggle-wrap{display:flex;align-items:center;gap:calc(var(--space)*2);padding:calc(var(--space)*1.5) 0;}
+.toggle-label{font-size:var(--fs-sm);color:var(--text2);}
+.toggle-btn{position:relative;width:48px;height:26px;background:var(--border);border-radius:13px;cursor:pointer;border:none;transition:background .3s;flex-shrink:0;min-height:44px;display:flex;align-items:center;padding:0 3px;}
+.toggle-btn.on{background:var(--accent);}
+.toggle-knob{width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .3s;box-shadow:0 2px 4px rgba(0,0,0,.3);}
+.toggle-btn.on .toggle-knob{transform:translateX(22px);}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space);min-height:48px;padding:0 calc(var(--space)*3);border-radius:var(--radius2);border:none;cursor:pointer;font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;transition:all .2s;letter-spacing:.02em;}
+.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;width:100%;box-shadow:0 4px 15px rgba(59,130,246,.3);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(59,130,246,.4);}
+.btn-primary:active{transform:translateY(0);}
+.btn-ghost{background:var(--card2);border:1px solid var(--border);color:var(--text2);}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.btn-sm{min-height:40px;padding:0 calc(var(--space)*2);font-size:var(--fs-xs);}
+
+/* Sim */
+.sim-result{display:none;margin-top:calc(var(--space)*2);background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(59,130,246,.04));border:1px solid rgba(16,185,129,.25);border-radius:var(--radius);padding:calc(var(--space)*2.5);animation:fadeUp .4s ease;}
+.sim-result.show{display:block;}
+.sim-metric{display:flex;justify-content:space-between;align-items:center;padding:calc(var(--space)*1) 0;border-bottom:1px solid var(--border);}
+.sim-metric:last-child{border-bottom:none;}
+.sim-metric-name{font-size:var(--fs-sm);color:var(--text2);}
+.sim-metric-val{font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;}
+.sim-explain{background:rgba(6,182,212,.06);border:1px solid rgba(6,182,212,.2);border-radius:var(--radius2);padding:calc(var(--space)*2);margin-top:calc(var(--space)*2);font-size:var(--fs-sm);color:#67e8f9;line-height:1.65;}
+.explain-row{margin-bottom:calc(var(--space)*1.5);padding-bottom:calc(var(--space)*1.5);border-bottom:1px solid rgba(6,182,212,.15);}
+.explain-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none;}
+.explain-metric{font-family:var(--font-display);font-weight:700;color:var(--text);display:block;margin-bottom:4px;}
+
+/* Metrics */
+.metric-row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space);margin-bottom:calc(var(--space)*2);}
+.metric-box{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:calc(var(--space)*2);}
+.metric-val{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;margin-bottom:4px;}
+.metric-bar{height:4px;background:var(--border);border-radius:2px;overflow:hidden;margin-top:var(--space);}
+.metric-fill{height:100%;border-radius:2px;transition:width 1.5s ease;}
+
+/* Log */
+.log-grid{display:grid;grid-template-columns:72px 1fr 54px 44px 44px 70px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.log-head{background:var(--card2);padding:var(--space) calc(var(--space)*1.5);font-size:var(--fs-xs);font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);border-bottom:1px solid var(--border);}
+.log-cell{padding:calc(var(--space)*1.25) calc(var(--space)*1.5);font-size:var(--fs-xs);color:var(--text2);border-bottom:1px solid var(--border);display:flex;align-items:center;background:var(--card);}
+.log-cell-alt{background:var(--card2);}
+.status-badge{font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;white-space:nowrap;text-transform:uppercase;}
+.status-opt{background:rgba(245,158,11,.15);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.status-scale{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.status-pause{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+
+/* Flashcards */
+.flashcard-wrap{perspective:1000px;height:180px;margin-bottom:calc(var(--space)*2);cursor:pointer;}
+.flashcard{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s ease;}
+.flashcard.flipped{transform:rotateY(180deg);}
+.fc-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:var(--radius);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:calc(var(--space)*3);text-align:center;}
+.fc-front{background:linear-gradient(135deg,#0f1d3d,#111827);border:1px solid var(--border2);}
+.fc-back{background:linear-gradient(135deg,#0a2018,#111827);border:1px solid rgba(16,185,129,.3);transform:rotateY(180deg);}
+.fc-hint{font-size:var(--fs-xs);color:var(--text3);margin-bottom:var(--space);text-transform:uppercase;letter-spacing:.08em;}
+.fc-term{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;color:var(--text);}
+.fc-def{font-size:var(--fs-sm);color:#6ee7b7;line-height:1.6;}
+.fc-nav{display:flex;gap:var(--space);align-items:center;justify-content:center;margin-bottom:calc(var(--space)*2);}
+.fc-counter{font-size:var(--fs-sm);font-weight:700;color:var(--text2);padding:0 var(--space);flex:1;text-align:center;}
+.fc-know-btns{display:grid;grid-template-columns:1fr 1fr;gap:var(--space);}
+.fc-know-btn{min-height:44px;border-radius:var(--radius2);border:none;cursor:pointer;font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;transition:all .2s;}
+.fc-know-btn.know{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.fc-know-btn.know:hover{background:rgba(16,185,129,.25);}
+.fc-know-btn.review{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.fc-know-btn.review:hover{background:rgba(245,158,11,.22);}
+.fc-mastery{display:flex;align-items:center;gap:var(--space);margin-bottom:calc(var(--space)*2);}
+.fc-mastery-bar{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden;}
+.fc-mastery-fill{height:100%;background:linear-gradient(90deg,var(--amber),var(--green));border-radius:3px;transition:width .4s ease;}
+.fc-mastery-label{font-size:var(--fs-xs);font-weight:700;color:var(--text3);white-space:nowrap;}
+
+/* ── Spaced Repetition ── */
+.nav-badge{position:absolute;top:4px;right:6px;min-width:16px;height:16px;padding:0 4px;background:var(--red);border-radius:8px;font-size:9px;font-weight:800;color:#fff;display:none;align-items:center;justify-content:center;font-family:var(--font-display);line-height:1;border:2px solid var(--bg);}
+.nav-badge.show{display:flex;}
+.fc-due-banner{display:none;background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.35);border-radius:var(--radius2);padding:calc(var(--space)*1.5) calc(var(--space)*2);margin-bottom:calc(var(--space)*2);font-size:var(--fs-sm);color:#fbbf24;align-items:center;gap:var(--space);}
+.fc-due-banner.show{display:flex;}
+.fc-due-count{font-family:var(--font-display);font-weight:800;font-size:var(--fs-md);color:var(--amber);flex-shrink:0;}
+.fc-due-text{flex:1;line-height:1.4;}
+.fc-due-btn{min-height:36px;padding:0 calc(var(--space)*1.5);background:rgba(245,158,11,.2);border:1px solid rgba(245,158,11,.4);border-radius:var(--radius2);color:#fbbf24;font-family:var(--font-display);font-size:var(--fs-xs);font-weight:700;cursor:pointer;white-space:nowrap;transition:background .2s;flex-shrink:0;}
+.fc-due-btn:hover{background:rgba(245,158,11,.35);}
+.fc-card-due .fc-front{border-color:rgba(245,158,11,.5)!important;box-shadow:0 0 0 2px rgba(245,158,11,.2);}
+.fc-interval-row{display:flex;gap:var(--space);margin-top:calc(var(--space)*1.5);}
+.fc-mode-label{font-size:var(--fs-xs);color:var(--text3);text-align:center;margin-bottom:var(--space);}
+.fc-sr-btn{flex:1;min-height:44px;border-radius:var(--radius2);border:none;cursor:pointer;font-family:var(--font-display);font-size:var(--fs-xs);font-weight:700;transition:all .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;}
+.fc-sr-btn.easy{background:rgba(16,185,129,.15);color:#34d399;border:1px solid rgba(16,185,129,.3);}
+.fc-sr-btn.easy:hover{background:rgba(16,185,129,.28);}
+.fc-sr-btn.hard{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.3);}
+.fc-sr-btn.hard:hover{background:rgba(245,158,11,.25);}
+.fc-sr-btn.again{background:rgba(239,68,68,.1);color:#f87171;border:1px solid rgba(239,68,68,.3);}
+.fc-sr-btn.again:hover{background:rgba(239,68,68,.2);}
+.fc-sr-interval{font-size:9px;opacity:.75;font-weight:400;}
+
+/* Copy clinic */
+.copy-email{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:calc(var(--space)*2);font-size:var(--fs-sm);color:var(--text2);line-height:1.9;margin-bottom:calc(var(--space)*2);}
+.em-label{font-size:var(--fs-xs);color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+.em-line{padding:6px 0;border-bottom:1px solid var(--border);}
+.em-line:last-child{border-bottom:none;}
+.highlight{background:rgba(239,68,68,.15);color:#fca5a5;border-radius:3px;padding:1px 4px;cursor:pointer;text-decoration:underline dotted rgba(239,68,68,.5);transition:background .2s;}
+.highlight:hover{background:rgba(239,68,68,.28);}
+.copy-score{display:flex;align-items:center;gap:calc(var(--space)*2);background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:calc(var(--space)*2);margin-bottom:calc(var(--space)*2);}
+.copy-score-num{font-family:var(--font-display);font-size:var(--fs-lg);font-weight:800;}
+.copy-score-meta{flex:1;}
+.copy-tabs{display:flex;gap:var(--space);margin-bottom:calc(var(--space)*2);}
+.copy-tab{flex:1;min-height:40px;border-radius:var(--radius2);border:1px solid var(--border);background:var(--card2);color:var(--text3);font-family:var(--font-display);font-size:var(--fs-xs);font-weight:700;cursor:pointer;transition:all .2s;}
+.copy-tab.active{background:rgba(59,130,246,.15);border-color:var(--accent);color:var(--accent);}
+.copy-panel{display:none;}
+.copy-panel.active{display:block;}
+.good-email{background:rgba(16,185,129,.05);border:1px solid rgba(16,185,129,.2);border-radius:var(--radius2);padding:calc(var(--space)*2);font-size:var(--fs-sm);color:var(--text2);line-height:1.9;margin-bottom:calc(var(--space)*2);}
+.good-line{padding:6px 0;border-bottom:1px solid rgba(16,185,129,.1);}
+.good-line:last-child{border-bottom:none;}
+.good-note{display:inline-block;font-size:var(--fs-xs);color:#34d399;margin-left:var(--space);}
+
+/* Scenario */
+.scenario-box{background:linear-gradient(135deg,rgba(15,29,61,.8),rgba(17,24,39,.9));border:1px solid var(--border2);border-radius:var(--radius);padding:calc(var(--space)*3);margin-bottom:calc(var(--space)*2);}
+.scenario-title{font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;margin-bottom:var(--space);}
+.scenario-desc{font-size:var(--fs-sm);color:var(--text2);line-height:1.6;margin-bottom:calc(var(--space)*2);}
+.scenario-choices{display:flex;flex-direction:column;gap:var(--space);}
+.scenario-choice{background:var(--card2);border:1px solid var(--border2);border-radius:var(--radius2);padding:calc(var(--space)*2);font-size:var(--fs-sm);color:var(--text2);cursor:pointer;min-height:52px;text-align:left;width:100%;font-family:var(--font-body);transition:all .2s;display:flex;align-items:flex-start;gap:var(--space);line-height:1.5;}
+.scenario-choice:hover:not(:disabled){border-color:var(--accent);color:var(--text);}
+.scenario-choice.chosen-right{border-color:var(--green);background:rgba(16,185,129,.1);color:#6ee7b7;}
+.scenario-choice.chosen-wrong{border-color:var(--red);background:rgba(239,68,68,.08);color:#fca5a5;}
+.scenario-choice.reveal-right{border-color:var(--green);background:rgba(16,185,129,.06);color:#6ee7b7;}
+.scenario-choice:disabled{cursor:not-allowed;}
+.scenario-result{display:none;margin-top:calc(var(--space)*2);font-size:var(--fs-sm);line-height:1.65;padding:calc(var(--space)*2);border-radius:var(--radius2);}
+.scenario-result.show{display:block;}
+.scenario-result.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.25);color:#6ee7b7;}
+.scenario-result.bad{background:rgba(239,68,68,.07);border:1px solid rgba(239,68,68,.2);color:#fca5a5;}
+
+/* Timeline */
+.timeline{position:relative;padding-left:calc(var(--space)*4);}
+.timeline::before{content:'';position:absolute;left:var(--space);top:0;bottom:0;width:2px;background:var(--border2);}
+.timeline-item{position:relative;margin-bottom:calc(var(--space)*3);}
+.timeline-dot{position:absolute;left:calc(-1*(var(--space)*4 - 4px));top:6px;width:12px;height:12px;border-radius:50%;border:2px solid var(--accent);background:var(--bg);z-index:1;}
+.timeline-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent);}
+.timeline-title{font-family:var(--font-display);font-size:var(--fs-md);font-weight:700;margin-bottom:4px;}
+.timeline-sub{font-size:var(--fs-sm);color:var(--text3);}
+
+/* Tools */
+.tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space);}
+.tool-card{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:calc(var(--space)*2);text-align:center;}
+.tool-icon{font-size:24px;margin-bottom:var(--space);}
+.tool-name{font-size:var(--fs-xs);font-weight:700;color:var(--text);font-family:var(--font-display);}
+.tool-cat{font-size:9px;color:var(--text3);margin-top:2px;}
+
+/* Misc */
+.tip-box{background:rgba(6,182,212,.07);border:1px solid rgba(6,182,212,.25);border-radius:var(--radius2);padding:calc(var(--space)*2);font-size:var(--fs-sm);color:#67e8f9;line-height:1.6;}
+.err-box{display:none;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:var(--radius2);padding:calc(var(--space)*1.5) calc(var(--space)*2);margin-bottom:calc(var(--space)*2);font-size:var(--fs-sm);color:#f87171;}
+.icon-btn{background:var(--card2);border:1px solid var(--border);border-radius:var(--radius2);padding:var(--space) calc(var(--space)*2);color:var(--text2);font-size:var(--fs-sm);font-weight:500;cursor:pointer;min-height:44px;display:inline-flex;align-items:center;gap:var(--space);font-family:var(--font-body);transition:all .2s;}
+.icon-btn:hover{border-color:var(--accent);color:var(--accent);}
+.divider{height:1px;background:var(--border);margin:calc(var(--space)*2) 0;}
+
+/* XP Toast */
+.xp-toast{position:fixed;top:80px;left:50%;transform:translateX(-50%) translateY(-20px);background:linear-gradient(135deg,var(--accent2),var(--accent));color:#fff;font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;padding:calc(var(--space)*1.5) calc(var(--space)*3);border-radius:20px;z-index:200;opacity:0;transition:all .35s;pointer-events:none;white-space:nowrap;box-shadow:0 4px 20px rgba(59,130,246,.4);}
+.xp-toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* Bottom Nav */
+.bottom-nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(10,15,30,.97);backdrop-filter:blur(16px);border-top:1px solid var(--border);height:var(--nav-h);display:flex;align-items:center;z-index:100;padding:0 var(--space);}
+.nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:8px 4px;cursor:pointer;border:none;background:none;min-height:44px;border-radius:var(--radius2);position:relative;transition:all .2s;color:var(--text3);font-family:var(--font-body);}
+.nav-item::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent3));border-radius:0 0 2px 2px;transition:width .3s;}
+.nav-item.active{color:var(--accent);}
+.nav-item.active::before{width:70%;}
+.nav-icon-wrap{width:32px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .2s;}
+.nav-item.active .nav-icon-wrap{background:rgba(59,130,246,.15);}
+.nav-label{font-size:9px;font-weight:600;letter-spacing:.02em;text-transform:uppercase;}
+</style>
+</head>
+<body>
+<div id="app">
+
+  <header class="app-header" role="banner">
+    <div class="app-logo">B2BEmailPro</div>
+    <div class="xp-pill" aria-label="XP earned">
+      <span class="xp-label">XP</span>
+      <span class="xp-val" id="xp-display">0</span>
+    </div>
+  </header>
+
+  <div class="xp-toast" id="xp-toast" role="status" aria-live="polite"></div>
+
+  <!-- ══ OVERVIEW ══ -->
+  <section id="sec-overview" class="section active" role="main" aria-label="Overview">
+    <div class="hero">
+      <p style="font-size:var(--fs-xs);color:var(--accent3);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:var(--space);">📍 Full-Time Position</p>
+      <h1 class="hero-title">B2B Email Marketing Expert</h1>
+      <p class="hero-sub">We're looking for someone who knows how to turn outreach into opportunities and conversations into booked meetings.</p>
+      <div style="margin-top:calc(var(--space)*2);">
+        <span class="tag tag-blue">📈 Revenue Impact</span>
+        <span class="tag tag-green">🚀 Growth Role</span>
+        <span class="tag tag-purple">✉️ Email Strategy</span>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">65%</div><div class="stat-label">Peak Open Rate</div></div>
+      <div class="stat-card"><div class="stat-num">20%</div><div class="stat-label">Max Reply Rate</div></div>
+      <div class="stat-card"><div class="stat-num">8%</div><div class="stat-label">Booked Call Rate</div></div>
+      <div class="stat-card"><div class="stat-num">95%</div><div class="stat-label">Inbox Placement</div></div>
+    </div>
+
+    <div class="card card-accent">
+      <h2 class="card-title">Your Role</h2>
+      <ul class="role-list">
+        <li>Build and scale outbound &amp; nurture email campaigns</li>
+        <li>Write persuasive cold &amp; warm email copy</li>
+        <li>Manage deliverability, warm-up &amp; inbox placement</li>
+        <li>Track opens, replies &amp; booked calls</li>
+        <li>Optimize continuously for better results</li>
+      </ul>
+    </div>
+
+    <div class="card card-green">
+      <h2 class="card-title">You Should Have</h2>
+      <ul class="check-list">
+        <li>Proven B2B email campaign experience</li>
+        <li>Strong lead generation / appointment booking results</li>
+        <li>Hands-on expertise with automation tools</li>
+        <li>Solid knowledge of deliverability best practices</li>
+        <li>Recruitment or Consulting background (preferred)</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">How This App Teaches You</h3>
+      <p class="body-sm" style="margin-bottom:calc(var(--space)*1.5)">This is not a passive guide. Every section makes you <strong style="color:var(--text)">actively apply</strong> what you read:</p>
+      <ul class="check-list">
+        <li>Read each lesson → pass a quiz to mark it complete</li>
+        <li>Run the campaign simulator → get coached on every metric</li>
+        <li>Spot problems in a real bad email → learn copywriting by doing</li>
+        <li>Flip flashcards → build lasting terminology recall</li>
+        <li>Make scenario decisions → understand real strategic consequences</li>
+      </ul>
+      <div class="tip-box" style="margin-top:calc(var(--space)*2)">🎯 Earn <strong>XP</strong> for every quiz passed, flashcard mastered, and scenario solved. Track your total in the top bar.</div>
+    </div>
+  </section>
+
+  <!-- ══ SKILLS / LEARN ══ -->
+  <section id="sec-skills" class="section" role="main" aria-label="Skills and Learning">
+    <h2 class="section-title">Learn & <span>Quiz</span></h2>
+
+    <div class="card" style="margin-bottom:calc(var(--space)*2)">
+      <div class="progress-meta">
+        <span class="label">Lessons Passed</span>
+        <span id="progress-pct" style="font-size:var(--fs-sm);font-weight:700;color:var(--accent)">0 / 7</span>
+      </div>
+      <div class="progress-track"><div class="progress-fill" id="progress-bar" style="width:0%"></div></div>
+      <p style="font-size:var(--fs-xs);color:var(--text3)">Read each lesson then answer the quiz correctly to earn XP and mark complete.</p>
+    </div>
+
+    <div id="learn-cards"></div>
+
+    <div class="card">
+      <h3 class="card-title" style="margin-bottom:calc(var(--space)*2)">Technical Skill Levels</h3>
+      <div id="skill-bars"></div>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title" style="margin-bottom:calc(var(--space)*2)">Top Tools to Master</h3>
+      <div class="tools-grid">
+        <div class="tool-card"><div class="tool-icon">⚡</div><div class="tool-name">Instantly</div><div class="tool-cat">Outreach</div></div>
+        <div class="tool-card"><div class="tool-icon">🦊</div><div class="tool-name">Lemlist</div><div class="tool-cat">Personalization</div></div>
+        <div class="tool-card"><div class="tool-icon">🔍</div><div class="tool-name">Apollo.io</div><div class="tool-cat">Lead Database</div></div>
+        <div class="tool-card"><div class="tool-icon">🎯</div><div class="tool-name">Smartlead</div><div class="tool-cat">Scaling</div></div>
+        <div class="tool-card"><div class="tool-icon">📊</div><div class="tool-name">HubSpot</div><div class="tool-cat">CRM</div></div>
+        <div class="tool-card"><div class="tool-icon">✅</div><div class="tool-name">NeverBounce</div><div class="tool-cat">List Cleaning</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CAMPAIGN LAB ══ -->
+  <section id="sec-campaign" class="section" role="main" aria-label="Campaign Lab">
+    <h2 class="section-title">Campaign <span>Lab</span></h2>
+
+    <div class="card">
+      <h3 class="card-title">Campaign Builder Simulator</h3>
+      <p class="body-sm" style="margin-bottom:calc(var(--space)*2.5)">Configure your campaign. After simulation, you get a <strong style="color:var(--accent3)">coached explanation</strong> of every metric — not just numbers.</p>
+
+      <div class="form-group">
+        <label class="form-label" for="camp-name">Campaign Name</label>
+        <input class="form-input" id="camp-name" type="text" placeholder="e.g. Q1 SaaS Founders Outreach" aria-required="true">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="target-aud">Target Audience</label>
+        <div class="form-select-wrap">
+          <select class="form-select" id="target-aud" aria-label="Select target audience">
+            <option value="">— Select Audience —</option>
+            <option value="founders">SaaS Founders</option>
+            <option value="vp">VP of Sales</option>
+            <option value="hr">HR Directors</option>
+            <option value="cmo">CMOs / Marketing Leaders</option>
+            <option value="cto">CTOs / Tech Leaders</option>
+            <option value="ops">Operations Managers</option>
+          </select>
+          <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="cta-type">Primary CTA</label>
+        <div class="form-select-wrap">
+          <select class="form-select" id="cta-type" aria-label="Select call to action">
+            <option value="call">Book a 15-Min Call</option>
+            <option value="demo">Request a Demo</option>
+            <option value="chat">Quick Chat?</option>
+            <option value="download">Download Case Study</option>
+          </select>
+          <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="form-label">Email Type</span>
+        <div class="toggle-wrap">
+          <span class="toggle-label" id="toggle-cold-label">Cold Outreach</span>
+          <button class="toggle-btn" id="type-toggle" onclick="toggleType()" aria-pressed="false" aria-label="Toggle cold or warm"><div class="toggle-knob"></div></button>
+          <span class="toggle-label" id="toggle-warm-label" style="color:var(--text3)">Warm Nurture</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="seq-steps">Sequence Steps</label>
+        <div class="form-select-wrap">
+          <select class="form-select" id="seq-steps" aria-label="Sequence steps">
+            <option value="3">3 Steps</option>
+            <option value="4">4 Steps</option>
+            <option value="5" selected>5 Steps</option>
+            <option value="6">6 Steps</option>
+          </select>
+          <svg class="select-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 6L8 10L12 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+      </div>
+
+      <div class="err-box" id="sim-error">⚠️ Please enter a <strong>Campaign Name</strong> and select a <strong>Target Audience</strong> first.</div>
+
+      <button class="btn btn-primary" onclick="runSimulation()" aria-label="Launch simulation">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 3L19 12L5 21V3Z" fill="currentColor"/></svg>
+        Launch Simulation
+      </button>
+
+      <div class="sim-result" id="sim-result" role="region" aria-live="polite">
+        <h4 class="card-title" style="color:var(--green);margin-bottom:calc(var(--space)*1.5)">✓ Simulation Results</h4>
+        <div class="sim-metric"><span class="sim-metric-name">📬 Inbox Placement</span><span class="sim-metric-val" id="r-inbox" style="color:var(--green)">—</span></div>
+        <div class="sim-metric"><span class="sim-metric-name">👁 Open Rate</span><span class="sim-metric-val" id="r-open" style="color:var(--accent)">—</span></div>
+        <div class="sim-metric"><span class="sim-metric-name">💬 Reply Rate</span><span class="sim-metric-val" id="r-reply" style="color:var(--accent3)">—</span></div>
+        <div class="sim-metric"><span class="sim-metric-name">📞 Booked Calls</span><span class="sim-metric-val" id="r-calls" style="color:var(--amber)">—</span></div>
+        <div class="sim-metric"><span class="sim-metric-name">🛡 Deliverability Score</span><span class="sim-metric-val" id="r-deliv" style="color:var(--green)">—</span></div>
+        <div class="sim-explain" id="sim-explain" style="display:none">
+          <div class="explain-row" id="ex-inbox"></div>
+          <div class="explain-row" id="ex-open"></div>
+          <div class="explain-row" id="ex-reply"></div>
+          <div class="explain-row" id="ex-calls"></div>
+          <div class="explain-row" id="ex-action" style="border:none;margin:0;padding:0"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scenario Practice -->
+    <div class="card">
+      <h3 class="card-title">🧠 Scenario Practice</h3>
+      <p class="body-sm" style="margin-bottom:calc(var(--space)*2)">Read each situation. Choose the correct strategic action. Learn from the consequence. Earn <strong style="color:var(--amber)">25 XP</strong> per correct answer.</p>
+      <div id="scenario-wrap"></div>
+    </div>
+  </section>
+
+  <!-- ══ METRICS ══ -->
+  <section id="sec-metrics" class="section" role="main" aria-label="Metrics">
+    <h2 class="section-title">Deliverability <span>Dashboard</span></h2>
+
+    <div class="metric-row">
+      <div class="metric-box"><div class="label">Inbox Placement</div><div class="metric-val" style="color:var(--green)">94%</div><div class="metric-bar"><div class="metric-fill" style="width:94%;background:var(--green)"></div></div></div>
+      <div class="metric-box"><div class="label">Open Rate</div><div class="metric-val" style="color:var(--accent)">48%</div><div class="metric-bar"><div class="metric-fill" style="width:48%;background:var(--accent)"></div></div></div>
+      <div class="metric-box"><div class="label">Reply Rate</div><div class="metric-val" style="color:var(--accent3)">12%</div><div class="metric-bar"><div class="metric-fill" style="width:12%;background:var(--accent3)"></div></div></div>
+      <div class="metric-box"><div class="label">Booked Calls</div><div class="metric-val" style="color:var(--amber)">4%</div><div class="metric-bar"><div class="metric-fill" style="width:4%;background:var(--amber)"></div></div></div>
+    </div>
+
+    <div class="card" style="margin-bottom:calc(var(--space)*2)">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:calc(var(--space)*2)">
+        <h3 class="card-title" style="margin-bottom:0">Performance Log</h3>
+        <button class="icon-btn" onclick="renderLog()" aria-label="Refresh log">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M1 4v6h6M23 20v-6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 0 1 3.51 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Refresh
+        </button>
+      </div>
+      <div class="log-grid" id="log-grid" role="table" aria-label="Campaign performance log">
+        <div class="log-head" role="columnheader">Date</div>
+        <div class="log-head" role="columnheader">Campaign</div>
+        <div class="log-head" role="columnheader">Open%</div>
+        <div class="log-head" role="columnheader">Reply</div>
+        <div class="log-head" role="columnheader">Calls</div>
+        <div class="log-head" role="columnheader">Status</div>
+      </div>
+    </div>
+
+    <!-- Flashcards -->
+    <div class="card">
+      <h3 class="card-title" style="margin-bottom:4px">📇 Terminology Flashcards</h3>
+      <p class="body-sm" style="margin-bottom:calc(var(--space)*2)">Tap to flip. Rate how well you knew it — the app schedules the next review automatically, just like Anki. Earn <strong style="color:var(--amber)">5 XP</strong> per card mastered.</p>
+      <div class="fc-due-banner" id="fc-due-banner" aria-live="polite">
+        <span class="fc-due-count" id="fc-due-count">0</span>
+        <span class="fc-due-text">cards due for review right now</span>
+        <button class="fc-due-btn" onclick="startReviewSession()" aria-label="Start review session">Review Now →</button>
+      </div>
+      <div class="fc-mastery">
+        <div class="fc-mastery-bar"><div class="fc-mastery-fill" id="fc-mastery-fill" style="width:0%"></div></div>
+        <span class="fc-mastery-label" id="fc-mastery-label">0% mastered</span>
+      </div>
+      <div class="flashcard-wrap" onclick="flipCard()" role="button" tabindex="0" aria-label="Flashcard — tap to flip" onkeydown="if(event.key==='Enter'||event.key===' ')flipCard()">
+        <div class="flashcard" id="flashcard">
+          <div class="fc-face fc-front">
+            <div class="fc-hint" id="fc-hint-front">Tap to reveal definition</div>
+            <div class="fc-term" id="fc-term">SPF Record</div>
+          </div>
+          <div class="fc-face fc-back">
+            <div class="fc-hint">Definition</div>
+            <div class="fc-def" id="fc-def">Loading...</div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-nav">
+        <button class="btn btn-ghost btn-sm" onclick="fcPrev()" aria-label="Previous card">← Prev</button>
+        <span class="fc-counter" id="fc-counter">1 / 10</span>
+        <button class="btn btn-ghost btn-sm" onclick="fcNext()" aria-label="Next card">Next →</button>
+      </div>
+      <div id="fc-sr-panel" style="display:none">
+        <div class="fc-mode-label">How well did you know it?</div>
+        <div class="fc-interval-row">
+          <button class="fc-sr-btn again" onclick="rateSR(0)" aria-label="Again — show again soon">Again<span class="fc-sr-interval" id="sr-lbl-0">1 min</span></button>
+          <button class="fc-sr-btn hard" onclick="rateSR(1)" aria-label="Hard — show in 10 minutes">Hard<span class="fc-sr-interval" id="sr-lbl-1">10 min</span></button>
+          <button class="fc-sr-btn easy" onclick="rateSR(2)" aria-label="Easy — show tomorrow">Easy<span class="fc-sr-interval" id="sr-lbl-2">1 day</span></button>
+        </div>
+      </div>
+      <div id="fc-basic-panel">
+        <div class="fc-know-btns">
+          <button class="fc-know-btn know" onclick="fcKnow()" aria-label="Mark as known">✓ I Know This</button>
+          <button class="fc-know-btn review" onclick="fcReview()" aria-label="Mark for review">↺ Need Review</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-accent">
+      <h3 class="card-title">Benchmark Targets</h3>
+      <div class="divider" style="margin-top:var(--space)"></div>
+      <div class="sim-metric"><span class="sim-metric-name">Open Rate Target</span><span style="font-weight:700;color:var(--accent);font-family:var(--font-display)">40%+</span></div>
+      <div class="sim-metric"><span class="sim-metric-name">Reply Rate Target</span><span style="font-weight:700;color:var(--accent);font-family:var(--font-display)">8%+</span></div>
+      <div class="sim-metric"><span class="sim-metric-name">Booked Call Rate</span><span style="font-weight:700;color:var(--accent);font-family:var(--font-display)">2%+</span></div>
+      <div class="sim-metric"><span class="sim-metric-name">Bounce Rate</span><span style="font-weight:700;color:var(--green);font-family:var(--font-display)">&lt;2%</span></div>
+      <div class="sim-metric" style="border:none"><span class="sim-metric-name">Show Rate</span><span style="font-weight:700;color:var(--accent);font-family:var(--font-display)">70%+</span></div>
+    </div>
+  </section>
+
+  <!-- ══ CAREER + COPY ══ -->
+  <section id="sec-career" class="section" role="main" aria-label="Career and Copy Practice">
+    <h2 class="section-title">Career + <span>Copy Clinic</span></h2>
+
+    <!-- Copy Clinic -->
+    <div class="card">
+      <h3 class="card-title">✏️ Email Copy Clinic</h3>
+      <p class="body-sm" style="margin-bottom:calc(var(--space)*2)">Compare a <strong style="color:#f87171">bad email</strong> vs. the <strong style="color:#34d399">fixed version</strong>. Tap the highlighted problem areas in the bad email to learn exactly what's wrong and why.</p>
+      <div class="copy-tabs">
+        <button class="copy-tab active" onclick="switchCopyTab('bad')" id="tab-bad" aria-pressed="true">❌ Bad Email</button>
+        <button class="copy-tab" onclick="switchCopyTab('good')" id="tab-good" aria-pressed="false">✅ Fixed Version</button>
+      </div>
+
+      <div class="copy-panel active" id="panel-bad">
+        <div class="copy-score">
+          <div class="copy-score-num" style="color:var(--red)">32/100</div>
+          <div class="copy-score-meta">
+            <div style="font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;color:var(--text)">Poor Email Score</div>
+            <div style="font-size:var(--fs-xs);color:var(--text3);margin-top:2px">5 problems — tap highlighted text to learn why it fails</div>
+          </div>
+        </div>
+        <div class="copy-email">
+          <div class="em-line"><span class="em-label">Subject: </span><span class="highlight" onclick="showIssue(0)">I wanted to reach out about our amazing software that can help your business grow significantly</span></div>
+          <div class="em-line"><span class="em-label">Opening: </span><span class="highlight" onclick="showIssue(1)">My name is John Smith and I am the Sales Director at TechCorp Inc. We have been in business for 15 years...</span></div>
+          <div class="em-line"><span class="em-label">Body: </span>Our platform offers <span class="highlight" onclick="showIssue(2)">unlimited features including AI analytics, dashboards, workflows, integrations, 24/7 support, white-labeling, API access, mobile apps, and much more</span>.</div>
+          <div class="em-line"><span class="em-label">CTA: </span><span class="highlight" onclick="showIssue(3)">Please let me know if you'd like to schedule a call, get a demo, receive our brochure, or just chat whenever you have free time.</span></div>
+          <div class="em-line"><span class="em-label">Sign-off: </span><span class="highlight" onclick="showIssue(4)">Best regards, John Smith, Sales Director, TechCorp Inc., john@techcorp.com, +1-555-123-4567, LinkedIn, Twitter: @johnsmith</span></div>
+        </div>
+        <div id="issue-display" style="display:none;" class="tip-box" aria-live="polite"></div>
+      </div>
+
+      <div class="copy-panel" id="panel-good">
+        <div class="copy-score" style="border-color:rgba(16,185,129,.3)">
+          <div class="copy-score-num" style="color:var(--green)">91/100</div>
+          <div class="copy-score-meta">
+            <div style="font-family:var(--font-display);font-size:var(--fs-sm);font-weight:700;color:var(--text)">Strong Email Score</div>
+            <div style="font-size:var(--fs-xs);color:var(--text3);margin-top:2px">Short, specific, one CTA, personalized — notes explain each choice</div>
+          </div>
+        </div>
+        <div class="good-email">
+          <div class="good-line"><span class="em-label" style="color:var(--text3)">Subject: </span>quick question about your hiring pipeline <span class="good-note">← under 8 words, no hype</span></div>
+          <div class="good-line"><span class="em-label" style="color:var(--text3)">Opening: </span>Saw you're scaling the sales team at [Company] — congrats on the Series B. <span class="good-note">← specific hook about them</span></div>
+          <div class="good-line"><span class="em-label" style="color:var(--text3)">Body: </span>We help SaaS companies fill AE roles 40% faster using email-first outreach. Worked with Notion and Loom. <span class="good-note">← one value prop + proof</span></div>
+          <div class="good-line"><span class="em-label" style="color:var(--text3)">CTA: </span>Worth a 15-min call this week? <span class="good-note">← single, low-friction ask</span></div>
+          <div class="good-line"><span class="em-label" style="color:var(--text3)">Sign-off: </span>— Sarah / LinkedIn link <span class="good-note">← human, not corporate</span></div>
+        </div>
+        <div class="tip-box">📌 <strong>Key principles:</strong> Specific subject. Lead with them. One value prop. Proof. Single CTA. Under 80 words total.</div>
+      </div>
+    </div>
+
+    <!-- Career Timeline -->
+    <div class="card" style="margin-bottom:calc(var(--space)*2)">
+      <h3 class="card-title" style="margin-bottom:calc(var(--space)*2.5)">Career Progression</h3>
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot active"></div>
+          <div class="timeline-title">Email Marketing Specialist</div>
+          <div class="timeline-sub">0–1 yr · $40k–$60k · Entry</div>
+          <p class="body-sm" style="margin-top:var(--space)">Learn fundamentals, run basic sequences, track KPIs. Document every campaign result — these become your proof.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">B2B Email Marketing Expert</div>
+          <div class="timeline-sub">1–3 yrs · $60k–$90k · Mid</div>
+          <p class="body-sm" style="margin-top:var(--space)">Own full campaign strategy and execution. Manage deliverability, automation, and performance reporting. Build playbooks.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Head of Outbound / Demand Gen</div>
+          <div class="timeline-sub">3–5 yrs · $90k–$130k · Senior</div>
+          <p class="body-sm" style="margin-top:var(--space)">Lead a team. Own the entire outbound motion. Drive pipeline generation at scale.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">VP Revenue / GTM Leader</div>
+          <div class="timeline-sub">5+ yrs · $130k–$200k+ · Executive</div>
+          <p class="body-sm" style="margin-top:var(--space)">Strategic leadership integrating sales, marketing, and operations for full go-to-market ownership.</p>
+        </div>
+        <div class="timeline-item" style="margin-bottom:0">
+          <div class="timeline-dot"></div>
+          <div class="timeline-title">Founder / Consultant</div>
+          <div class="timeline-sub">Anytime · Unlimited · Entrepreneurial</div>
+          <p class="body-sm" style="margin-top:var(--space)">Launch your own agency. Top consultants bill $150–$300/hr. Your documented results are the product.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-amber">
+      <h3 class="card-title">🚀 Accelerate Your Path</h3>
+      <ul class="check-list" style="margin-top:var(--space)">
+        <li>Document every campaign result with screenshots and numbers</li>
+        <li>Post data-driven results on LinkedIn weekly</li>
+        <li>Specialize in one niche (recruiting, SaaS, consulting)</li>
+        <li>Get HubSpot Email Marketing certified — it's free</li>
+        <li>Join communities: Sales Hacker, Outbound Squad Slack</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 class="card-title">Compensation Reality</h3>
+      <div class="sim-metric"><span class="sim-metric-name">Base Salary Range</span><span style="font-weight:700;color:var(--text);font-family:var(--font-display)">$50k–$100k</span></div>
+      <div class="sim-metric"><span class="sim-metric-name">Performance Bonus</span><span style="font-weight:700;color:var(--green);font-family:var(--font-display)">10–25%</span></div>
+      <div class="sim-metric"><span class="sim-metric-name">Freelance/Agency Rate</span><span style="font-weight:700;color:var(--accent3);font-family:var(--font-display)">$75–$200/hr</span></div>
+      <div class="sim-metric" style="border:none"><span class="sim-metric-name">Top Earner Potential</span><span style="font-weight:700;color:var(--amber);font-family:var(--font-display)">$200k+</span></div>
+    </div>
+  </section>
+
+  <!-- Bottom Nav -->
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+    <button class="nav-item active" onclick="switchTab('overview')" id="nav-overview" aria-label="Overview" aria-current="page">
+      <div class="nav-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/></svg></div>
+      <span class="nav-label">Overview</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('skills')" id="nav-skills" aria-label="Skills">
+      <div class="nav-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="nav-label">Skills</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('campaign')" id="nav-campaign" aria-label="Campaign Lab">
+      <div class="nav-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="nav-label">Lab</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('metrics')" id="nav-metrics" aria-label="Metrics">
+      <div class="nav-icon-wrap" style="position:relative"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="nav-badge" id="nav-metrics-badge" aria-label="review due">0</span></div>
+      <span class="nav-label">Metrics</span>
+    </button>
+    <button class="nav-item" onclick="switchTab('career')" id="nav-career" aria-label="Career and Copy">
+      <div class="nav-icon-wrap"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <span class="nav-label">Career</span>
+    </button>
+  </nav>
+</div>
+
+<script>
+// ─────────────────────────────────
+// XP
+// ─────────────────────────────────
+let totalXP = 0;
+function addXP(amount, label) {
+  totalXP += amount;
+  document.getElementById('xp-display').textContent = totalXP;
+  const t = document.getElementById('xp-toast');
+  t.textContent = '+' + amount + ' XP — ' + label;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2300);
+}
+
+// ─────────────────────────────────
+// NAV
+// ─────────────────────────────────
+function switchTab(name) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => { n.classList.remove('active'); n.removeAttribute('aria-current'); });
+  document.getElementById('sec-' + name).classList.add('active');
+  const nav = document.getElementById('nav-' + name);
+  nav.classList.add('active');
+  nav.setAttribute('aria-current', 'page');
+  window.scrollTo(0, 0);
+  if (name === 'metrics') {
+    renderLog();
+    initFlashcards();
+  }
+}
+
+// ─────────────────────────────────
+// LESSONS + QUIZZES
+// ─────────────────────────────────
+const lessons = [
+  { step:'01', title:'What is B2B Email Marketing?',
+    content:'B2B email marketing targets businesses rather than consumers. You\'re writing to decision-makers — VPs, Directors, Founders. Your goal isn\'t to sell immediately but to start a conversation leading to a discovery call. Key differences from B2C: longer sales cycles, higher deal values, more logical and less emotional copy. Success is measured in conversations started, not clicks. The best B2B email marketers think like strategists, not blasters.',
+    q:'What is the PRIMARY goal of a B2B cold email?',
+    opts:['Close a sale immediately','Drive traffic to your website','Start a conversation that leads to a booked call','Build brand awareness'],
+    correct:2,
+    right:'Exactly right. B2B cold email\'s only job is earning a reply that leads to a 15-minute call. The deal closes on the call — weeks or months later. Thinking of email as a closing tool is the most common beginner mistake.',
+    wrong:'B2B cold email is NOT about closing, traffic, or brand. Its single job is to earn one reply. The deal closes on the call that follows. Changing this mental model is the first step to writing emails that actually work.'
+  },
+  { step:'02', title:'How Cold Outreach Works',
+    content:'Cold outreach means contacting prospects who have never heard of you. It requires four things done right simultaneously: (1) A verified, clean lead list targeted to your Ideal Customer Profile. (2) A warmed-up sending domain with SPF/DKIM/DMARC configured. (3) A short sequence of 3–5 emails spaced 2–3 days apart. (4) A single clear call to action — usually a 15-min discovery call. The formula: Volume × Personalization = Pipeline. Mass-blasting generic emails to thousands = spam. Sending 50 hyper-relevant emails = real results.',
+    q:'Your cold campaign gets a 2% open rate. What is the MOST LIKELY root cause?',
+    opts:['Email copy is too long','Subject line is too weak','Deliverability issue — emails are landing in spam','Wrong target audience'],
+    correct:2,
+    right:'Correct. A 2% open rate almost always signals a deliverability problem — your emails aren\'t reaching the inbox at all. Subject lines and audience targeting affect reply rates, not open rates. Fix the technical layer first.',
+    wrong:'Copy and audience issues affect reply rates — not open rates. A 2% open rate means emails aren\'t being seen at all. That\'s a domain reputation or spam filter issue. You can\'t write your way out of a deliverability problem.'
+  },
+  { step:'03', title:'Email Copywriting Basics',
+    content:'Great B2B copy is short, specific, and hyper-relevant. Framework: Problem → Agitate → Solve → CTA. Hard rules: Subject line under 8 words, no hype words (amazing, revolutionary, game-changing). First sentence must reference something specific to the recipient — their company news, their role, a LinkedIn post. Body: 3–4 sentences maximum. One CTA only — never two. Sign off with your first name and a human LinkedIn URL, not a full corporate signature block.',
+    q:'Which subject line will most likely get opened by a busy VP of Sales?',
+    opts:['"Revolutionizing Sales with Our AI Platform"','"quick question about your Q2 pipeline"','"Introducing TechCorp: The #1 Sales Tool"','"IMPORTANT: Special Offer for Sales Leaders"'],
+    correct:1,
+    right:'Correct. Short, lowercase, curiosity-based. It looks like an email from a real person. That\'s exactly what cuts through a crowded inbox — it doesn\'t look like marketing.',
+    wrong:'Hype words, ALL CAPS, and "Introducing" are red flags to spam filters and busy executives. The best subject lines look like messages between two real people — short, lowercase, and specific to a real situation.'
+  },
+  { step:'04', title:'Deliverability Fundamentals',
+    content:'Deliverability = landing in the primary inbox, not promotions or spam. Non-negotiable technical setup: SPF authenticates your sending server. DKIM adds a cryptographic signature to each email. DMARC tells providers what to do if authentication fails. New domains must be "warmed up" — start with 5–10 emails/day and ramp over 4–6 weeks using tools like Mailreach or Instantly. Never exceed 50 emails/day per inbox. Keep bounce rate below 2%. Clean your list monthly with NeverBounce.',
+    q:'You register a fresh domain today. What must you do BEFORE sending cold emails?',
+    opts:['Send 200 emails immediately to test it','Set up SPF/DKIM/DMARC and warm the domain for 4–6 weeks','Buy a list of 10,000 contacts and blast them','Rewrite subject lines to avoid spam words'],
+    correct:1,
+    right:'Perfect. A fresh domain has zero sender reputation. Sending volume too fast gets it permanently blacklisted. Authentication records + gradual warm-up is the only correct path. Patience here protects your entire future campaign investment.',
+    wrong:'Sending high volume on a fresh domain gets it blacklisted within days — permanently. Subject lines can\'t fix a reputation problem. You must authenticate the domain and warm it slowly. This is a technical discipline, not a creative one.'
+  },
+  { step:'05', title:'Automation & Scaling',
+    content:'Tools like Instantly, Lemlist, and Smartlead let you run multi-step sequences on autopilot. The golden scaling rule: add inboxes, NOT volume per inbox. If one inbox sends 40/day, add a second inbox on a separate warmed domain — total 80/day, not 80 from one inbox. Integrate with your CRM (HubSpot, Salesforce) to track every reply from first email to closed deal. A/B test one variable at a time — subject lines first, then opening lines, then CTAs. Never test multiple variables at once or you won\'t know what caused the change.',
+    q:'Your campaign is performing well. You want to double volume. What do you do?',
+    opts:['Double daily sends on your existing inbox','Add a second sending inbox on a separate warmed domain','Switch to a cheaper email tool','Remove personalization to send faster'],
+    correct:1,
+    right:'Exactly right. More inboxes, not more sends per inbox. Each inbox has a reputation ceiling. Adding a second inbox on a separately warmed domain is how professionals scale safely without risking their existing campaigns.',
+    wrong:'Increasing sends per inbox breaks your sender reputation. Email providers flag sudden spikes. And removing personalization kills the reply rate making the campaign work. Scale horizontally — more inboxes at the same safe volume each.'
+  },
+  { step:'06', title:'KPI Tracking',
+    content:'Five KPIs that matter in B2B email: Open Rate (target 40%+) — measures deliverability and subject line quality. Reply Rate (target 8%+) — measures copy quality and offer relevance. Positive Reply Rate (target 4%+) — measures offer-market fit. Booked Call Rate (target 2%+) — measures CTA effectiveness. Show Rate (target 70%+) — measures how well your pre-call nurture sequence works. Diagnostic: if opens are high but replies low → fix your copy. If opens are low → fix deliverability or subject line first. Never optimize copy when the root problem is technical.',
+    q:'Your open rate is 52% but reply rate is only 3%. Which element needs fixing?',
+    opts:['Domain reputation and deliverability','Subject line quality','Email copy — the body and/or the CTA','Sending volume'],
+    correct:2,
+    right:'Correct. A 52% open rate means people are opening it — deliverability and subject line work fine. The drop happens after they open it. That\'s a copy problem: body, value proposition, or CTA is not compelling enough to act.',
+    wrong:'High opens rule out deliverability and subject line — those work. The issue is what happens after they open it. Low reply rate despite good opens is always a copy problem. Rewrite the opening line and CTA.'
+  },
+  { step:'07', title:'Career Growth Strategy',
+    content:'Your growth path: Email Specialist → B2B Email Expert → Head of Outbound → Revenue Operations → Founder/Consultant. The three habits of fast-track growth: (1) Document every campaign with screenshots, numbers, and outcomes. This becomes your verifiable portfolio — more valuable than a resume. (2) Share specific results on LinkedIn weekly. "41% open rate, 12 booked calls — here\'s the subject line" builds real authority. (3) Specialize in one niche. Being "the B2B email expert for recruiting agencies" is 10x more powerful than being a generic marketer. Top performers earn $60k–$200k+.',
+    q:'You ran a great campaign: 500 emails, 41% open, 9% reply, 12 booked calls. What\'s your best career move?',
+    opts:['Keep it private — it\'s company data','Share the results and key takeaways on LinkedIn','Delete the data after the campaign','Only share it if every metric was perfect'],
+    correct:1,
+    right:'100% correct. Results data — shared without client names — is career currency. Numbers and strategy posted publicly build authority no resume can match. Every campaign you keep private is a missed opportunity to attract your next role.',
+    wrong:'Results (without client names) are your most powerful career asset. Sharing your process and outcomes publicly builds authority that a resume never can. Document everything, share everything — that\'s how top performers get found.'
+  }
+];
+
+let quizPassed = new Set();
+function buildLearnCards() {
+  const container = document.getElementById('learn-cards');
+  lessons.forEach((L, idx) => {
+    const div = document.createElement('div');
+    div.className = 'learn-card';
+    div.dataset.idx = idx;
+    const opts = L.opts.map((o, oi) =>
+      `<button class="quiz-opt" onclick="answerQuiz(${idx},${oi})">${o}</button>`
+    ).join('');
+    div.innerHTML = `
+      <button class="learn-toggle" aria-expanded="false" onclick="toggleLearn(this)">
+        <span class="learn-step">${L.step}</span>
+        <span class="learn-toggle-title">${L.title}</span>
+        <span class="learn-status" id="ls-${idx}">⬜</span>
+        <span class="learn-arrow" aria-hidden="true">▼</span>
+      </button>
+      <div class="learn-body">
+        <div class="learn-content">${L.content}</div>
+        <div class="quiz-area">
+          <div class="quiz-q"><span>Knowledge Check</span>${L.q}</div>
+          <div class="quiz-options" id="qo-${idx}">${opts}</div>
+          <div class="quiz-feedback" id="qf-${idx}"></div>
+        </div>
+      </div>`;
+    container.appendChild(div);
+  });
+}
+
+function toggleLearn(btn) {
+  const card = btn.closest('.learn-card');
+  const open = card.classList.toggle('open');
+  btn.setAttribute('aria-expanded', open);
+}
+
+function answerQuiz(li, ci) {
+  const L = lessons[li];
+  const opts = document.querySelectorAll(`#qo-${li} .quiz-opt`);
+  const right = ci === L.correct;
+  const fb = document.getElementById('qf-' + li);
+
+  if (right) {
+    // Correct — lock all options, show success
+    opts.forEach(o => { o.disabled = true; o.classList.remove('wrong'); });
+    opts[ci].classList.add('correct');
+    fb.className = 'quiz-feedback show good';
+    fb.innerHTML = '✓ ' + L.right;
+    if (!quizPassed.has(li)) {
+      quizPassed.add(li);
+      document.getElementById('ls-' + li).textContent = '✅';
+      document.querySelector(`.learn-card[data-idx="${li}"]`).classList.add('passed');
+      const done = quizPassed.size;
+      document.getElementById('progress-pct').textContent = done + ' / 7';
+      document.getElementById('progress-bar').style.width = (done / 7 * 100) + '%';
+      addXP(20, 'Quiz: ' + L.title.split(' ').slice(0, 4).join(' '));
+    }
+  } else {
+    // Wrong — highlight wrong choice, show feedback, allow retry
+    opts.forEach(o => o.classList.remove('wrong', 'correct'));
+    opts[ci].classList.add('wrong');
+    fb.className = 'quiz-feedback show bad';
+    fb.innerHTML = '✗ ' + L.wrong + ' <em style="color:var(--text3);display:block;margin-top:6px;font-size:var(--fs-xs)">Try again ↑</em>';
+  }
+}
+
+// ─────────────────────────────────
+// SKILL BARS
+// ─────────────────────────────────
+const skills = [
+  {name:'Cold Email Copywriting',pct:92},{name:'Deliverability & DNS Setup',pct:88},
+  {name:'Campaign Automation',pct:85},{name:'Lead List Building',pct:90},
+  {name:'A/B Testing',pct:82},{name:'CRM Integration',pct:75},{name:'KPI Reporting',pct:87}
+];
+const sb = document.getElementById('skill-bars');
+skills.forEach(s => {
+  sb.innerHTML += `<div class="skill-item"><span class="skill-name">${s.name}</span><div class="skill-bar"><div class="skill-fill" style="width:${s.pct}%"></div></div><span class="skill-pct">${s.pct}%</span></div>`;
+});
+
+// ─────────────────────────────────
+// TOGGLE
+// ─────────────────────────────────
+let isWarm = false;
+function toggleType() {
+  isWarm = !isWarm;
+  const btn = document.getElementById('type-toggle');
+  btn.classList.toggle('on', isWarm);
+  btn.setAttribute('aria-pressed', isWarm);
+  document.getElementById('toggle-cold-label').style.color = isWarm ? 'var(--text3)' : 'var(--text)';
+  document.getElementById('toggle-warm-label').style.color = isWarm ? 'var(--text)' : 'var(--text3)';
+}
+
+// ─────────────────────────────────
+// SIMULATION + GUIDED COACHING
+// ─────────────────────────────────
+function rand(a, b) { return Math.floor(Math.random() * (b - a + 1)) + a; }
+
+const audLabels = {founders:'SaaS Founders',vp:'VP of Sales',hr:'HR Directors',cmo:'CMOs',cto:'CTOs',ops:'Operations Managers'};
+const ctaLabels = {call:'15-Min Call',demo:'Demo Request',chat:'Quick Chat',download:'Case Study Download'};
+const ctaMult = {call:1.0,demo:0.85,chat:1.1,download:0.7};
+
+function runSimulation() {
+  const name = document.getElementById('camp-name').value.trim();
+  const aud = document.getElementById('target-aud').value;
+  const err = document.getElementById('sim-error');
+  if (!name || !aud) { err.style.display = 'block'; return; }
+  err.style.display = 'none';
+
+  const steps = parseInt(document.getElementById('seq-steps').value);
+  const cta = document.getElementById('cta-type').value;
+  const mult = ctaMult[cta];
+
+  const openRate  = rand(isWarm ? 45 : 30, isWarm ? 65 : 55);
+  const replyRate = Math.round(rand(isWarm ? 10 : 5, isWarm ? 20 : 15) * mult);
+  const callRate  = Math.min(8, rand(1, 4) + Math.round((steps - 3) * 0.4));
+  const inbox     = rand(88, 98);
+  const deliv     = rand(80, 99);
+
+  document.getElementById('r-inbox').textContent = inbox + '%';
+  document.getElementById('r-open').textContent  = openRate + '%';
+  document.getElementById('r-reply').textContent = replyRate + '%';
+  document.getElementById('r-calls').textContent = callRate + '%';
+  document.getElementById('r-deliv').textContent = deliv + '/100';
+  document.getElementById('sim-result').classList.add('show');
+
+  const audName = audLabels[aud] || aud;
+  const ctaName = ctaLabels[cta] || cta;
+  const type    = isWarm ? 'warm nurture' : 'cold outreach';
+
+  document.getElementById('ex-inbox').innerHTML =
+    `<span class="explain-metric">📬 Inbox Placement: ${inbox}%</span>` +
+    (inbox >= 93
+      ? `Your domain authentication (SPF, DKIM, DMARC) is healthy and sending volume is within safe limits. Your emails are genuinely reaching ${audName} inboxes.`
+      : `Below ideal (target 95%+). Likely cause: SPF/DKIM/DMARC records are misconfigured, or you're sending too many emails per day from a single inbox. Run your domain through mail-tester.com to diagnose.`);
+
+  document.getElementById('ex-open').innerHTML =
+    `<span class="explain-metric">👁 Open Rate: ${openRate}%</span>` +
+    (openRate >= 40
+      ? `Solid result for ${type}. Your subject line is working for ${audName}. Continue testing curiosity-based and role-specific lines against each other — even 5% lift compounds significantly at scale.`
+      : `Below target (40%+). For ${audName}, try subject lines that reference their specific role or a relevant business challenge. Also verify deliverability — low opens can be a technical issue, not just a creative one.`);
+
+  document.getElementById('ex-reply').innerHTML =
+    `<span class="explain-metric">💬 Reply Rate: ${replyRate}%</span>` +
+    (replyRate >= 8
+      ? `Above benchmark. Your copy is resonating with ${audName} and the "${ctaName}" CTA is landing well. This means your value proposition is relevant. Now test alternative opening lines to push even higher.`
+      : `Below target (8%+). ${openRate >= 40 ? 'Since your open rate is good, this is a copy problem — not a deliverability problem.' : 'Deliverability may be masking the real copy issue too.'} For ${audName}: lead with their pain, not your product. The "${ctaName}" ask may also be too high-friction — try softening it.`);
+
+  document.getElementById('ex-calls').innerHTML =
+    `<span class="explain-metric">📞 Booked Calls: ${callRate}%</span>` +
+    (callRate >= 2
+      ? `Good. Your ${steps}-step sequence is giving prospects enough touchpoints before committing to a "${ctaName}". ${steps >= 5 ? 'The additional follow-up steps are contributing.' : 'Consider one more follow-up to catch slower responders.'}`
+      : `Low. Even with replies, many prospects don't convert to calls. Try: (1) Offer a specific time slot in your last follow-up instead of a generic ask. (2) Use "just 10 mins?" instead of "${ctaName}" — lower commitment = more yeses.`);
+
+  let action;
+  if (openRate >= 40 && replyRate >= 8 && callRate >= 2) {
+    action = '🚀 <strong>Next Step: Scale it.</strong> Add a second inbox on a separate warmed domain to double volume safely. Expand your lead list with more ' + audName + ' via Apollo.io or LinkedIn Sales Navigator. Document these results — they\'re portfolio gold.';
+    addXP(15, 'Simulation Run');
+  } else if (openRate < 35) {
+    action = '🔧 <strong>Priority Fix: Deliverability.</strong> Before touching any copy, check your domain health at mail-tester.com. Clean your lead list — remove anyone who hasn\'t opened in 30 days. Open rate problems are always technical before they\'re creative.';
+    addXP(10, 'Simulation Run');
+  } else {
+    action = '✏️ <strong>Priority Fix: Rewrite your opening line.</strong> It should reference something specific to ' + audName + ' — a recent funding event, a LinkedIn post they made, or a known pain in their industry. Generic openers are the #1 reply-rate killer.';
+    addXP(10, 'Simulation Run');
+  }
+  document.getElementById('ex-action').innerHTML = action;
+  document.getElementById('sim-explain').style.display = 'block';
+}
+
+// ─────────────────────────────────
+// SCENARIO DECISION TREES
+// ─────────────────────────────────
+const scenarios = [
+  {
+    title:'🚨 Scenario 1: Crashing Open Rate',
+    desc:'Your campaign had 45% open rates last week. This Monday it dropped to 11%. Nothing changed in your copy or audience. What do you do FIRST?',
+    choices:['Rewrite all subject lines immediately','Check domain health via mail-tester.com','Pause the campaign and wait a week','Switch to a new audience segment'],
+    correct:1,
+    right:'✓ Correct. A sudden open rate crash with no copy changes is almost always a deliverability problem — your domain may be flagged or blacklisted. You always check the technical layer before touching creative. mail-tester.com gives an instant domain health score.',
+    wrong:'✗ When open rates crash suddenly without any creative changes, it\'s never a subject line or audience problem — it\'s technical. Your domain is likely flagged. Fix deliverability first, or no subject line will save the campaign.'
+  },
+  {
+    title:'📈 Scenario 2: High Opens, Zero Replies',
+    desc:'Your sequence gets a 51% open rate — but only a 1.5% reply rate after 400 sends. People are opening but not responding. What\'s the most effective fix?',
+    choices:['Increase sending volume to reach more people','Add more emails to the sequence','Rewrite the email body — sharpen your opening line and CTA','Buy a bigger lead list'],
+    correct:2,
+    right:'✓ Correct. High opens + low replies = copy problem, not a volume or list problem. The subject line works (they\'re opening). The body isn\'t compelling them to act. Fix: rewrite the first sentence to be about THEM, not you — and ensure the CTA is one clear, low-friction ask.',
+    wrong:'✗ Volume and list size won\'t fix a copy problem — you\'d just get more people ignoring you at scale. High opens confirm deliverability and subject line work fine. The fix lives in the email body, specifically the first line and the call to action.'
+  },
+  {
+    title:'🔥 Scenario 3: Time to Scale',
+    desc:'3 weeks in: 48% open rate, 11% reply, 5% booked calls. Your manager wants to 5x volume next week. How do you scale safely?',
+    choices:['Increase sends from 40 to 200 on your current inbox','Set up 4 additional inboxes on separately warmed domains','Switch to a mass email tool and blast 10,000 contacts','Remove personalization to send emails faster'],
+    correct:1,
+    right:'✓ Perfect. This is exactly how professionals scale cold outreach. Never exceed 50/day per inbox. Instead scale horizontally: 5 inboxes × 40 emails/day = 200 total daily sends, all at safe individual levels. Each inbox needs its own separately warmed domain.',
+    wrong:'✗ Spiking volume on a single inbox gets your domain blacklisted within days — permanently. Mass blasting destroys the reply rate that\'s making this campaign work. The only safe way to 5x is 5 inboxes on 5 separately warmed domains.'
+  }
+];
+
+let scenarioAnswered = new Set();
+function buildScenarios() {
+  const wrap = document.getElementById('scenario-wrap');
+  scenarios.forEach((s, si) => {
+    const choiceHTML = s.choices.map((c, ci) =>
+      `<button class="scenario-choice" onclick="answerScenario(${si},${ci})">
+        <span style="color:var(--text3);font-weight:700;flex-shrink:0">${String.fromCharCode(65+ci)}.</span>${c}
+      </button>`
+    ).join('');
+    const box = document.createElement('div');
+    box.innerHTML = `
+      <div class="scenario-box">
+        <div class="scenario-title">${s.title}</div>
+        <div class="scenario-desc">${s.desc}</div>
+        <div class="scenario-choices" id="sc-${si}">${choiceHTML}</div>
+        <div class="scenario-result" id="sr-${si}"></div>
+      </div>`;
+    wrap.appendChild(box);
+  });
+}
+
+function answerScenario(si, ci) {
+  const s = scenarios[si];
+  const choices = document.querySelectorAll(`#sc-${si} .scenario-choice`);
+  choices.forEach(c => c.disabled = true);
+  const right = ci === s.correct;
+  choices[ci].classList.add(right ? 'chosen-right' : 'chosen-wrong');
+  if (!right) choices[s.correct].classList.add('reveal-right');
+  const res = document.getElementById('sr-' + si);
+  res.className = 'scenario-result show ' + (right ? 'good' : 'bad');
+  res.innerHTML = right ? s.right : s.wrong;
+  if (right && !scenarioAnswered.has(si)) {
+    scenarioAnswered.add(si);
+    addXP(25, 'Scenario Solved!');
+  }
+}
+
+// ─────────────────────────────────
+// COPY CLINIC
+// ─────────────────────────────────
+const issues = [
+  {t:'Subject Line: Too Long & Full of Hype', b:'18 words long with vague hype words ("amazing", "significantly"). Spam filters flag these patterns instantly. Busy executives delete them. Fix: under 8 words, lowercase, no hype, sounds human. E.g.: "quick question about your pipeline"'},
+  {t:'Fatal Mistake: Leading With Your Own Name', b:'"My name is John..." — nobody cares who you are until they care what you can do for THEM. The first line must be about the recipient: their company, recent news, or a specific pain. Never open with yourself.'},
+  {t:'Feature List Dumping (Creates Overwhelm)', b:'Listing 10 features overwhelms and confuses. Prospects don\'t know what to focus on — so they do nothing. Pick ONE value proposition matching their pain and say it clearly. More features = less action.'},
+  {t:'Multiple CTAs (Decision Paralysis)', b:'Four options (call, demo, brochure, chat) create paralysis — the prospect chooses nothing. Every email needs exactly ONE ask. The lowest-friction version wins: "Worth a 15-min call this week?" beats a menu every time.'},
+  {t:'Corporate Signature Block (Kills Authenticity)', b:'A 5-line signature with title, phone, LinkedIn, and Twitter screams "automated marketing blast." It destroys the human feel that makes cold email work. Use just your first name and a LinkedIn link. Full stop.'}
+];
+function showIssue(idx) {
+  const box = document.getElementById('issue-display');
+  box.style.display = 'block';
+  box.innerHTML = `<strong style="color:var(--accent3)">⚠️ ${issues[idx].t}</strong><br><br>${issues[idx].b}`;
+  box.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function switchCopyTab(tab) {
+  ['bad','good'].forEach(t => {
+    document.getElementById('panel-' + t).className = 'copy-panel' + (t === tab ? ' active' : '');
+    document.getElementById('tab-' + t).className = 'copy-tab' + (t === tab ? ' active' : '');
+    document.getElementById('tab-' + t).setAttribute('aria-pressed', t === tab);
+  });
+  // Reset issue explanation when switching tabs
+  const issueBox = document.getElementById('issue-display');
+  if (issueBox) issueBox.style.display = 'none';
+}
+
+// ─────────────────────────────────
+// FLASHCARDS + SPACED REPETITION ENGINE
+// ─────────────────────────────────
+const cards = [
+  {term:'SPF Record',def:'Sender Policy Framework — a DNS record listing which mail servers can send on behalf of your domain. Missing SPF = high spam probability for all outgoing email.'},
+  {term:'DKIM',def:'DomainKeys Identified Mail — adds a cryptographic signature to every sent email so receiving servers can verify it was not tampered with in transit.'},
+  {term:'DMARC',def:'Domain-based Message Authentication — tells receiving servers what to do when SPF/DKIM fail: quarantine, reject, or allow through. Protects your domain from spoofing.'},
+  {term:'Domain Warm-up',def:'Gradually increasing send volume from a new domain over 4–6 weeks to build sender reputation. Skipping this causes immediate blacklisting and ruins the domain.'},
+  {term:'Bounce Rate',def:'Percentage of emails that could not be delivered. Hard bounces must stay below 2%. High bounce rate permanently destroys domain reputation.'},
+  {term:'Open Rate',def:'Percentage of delivered emails that recipients opened. B2B cold benchmark: 30–65%. Low open rate = deliverability or subject line problem — fix technical layer first.'},
+  {term:'Reply Rate',def:'Percentage of emails that received any reply. Target 8%+. High opens but low replies = copy problem. This is where your skill as a copywriter is directly measured.'},
+  {term:'ICP',def:'Ideal Customer Profile — detailed description of the company most likely to buy: industry, size, revenue, tech stack, location. Always define this before building any list.'},
+  {term:'CTA',def:'Call To Action — the one specific ask in your email. In B2B cold outreach: always a single low-commitment request like "Worth a 15-min call this week?"'},
+  {term:'Sequence',def:'A series of 3–6 automated follow-up emails sent over 1–3 weeks. Each follow-up increases reply probability 15–25%. Most replies come after the 2nd or 3rd touch.'}
+];
+
+// SR intervals in ms — demo-friendly: Again=1min, Hard=10min, Easy=24hr
+const SR_INTERVALS = [60*1000, 10*60*1000, 24*60*60*1000];
+const SR_LABELS    = ['1 min','10 min','1 day'];
+
+// Per-card state: nextDue timestamp, current interval bucket, ease factor
+let srState = cards.map(() => ({ nextDue: null, intervalIdx: 1, ease: 2.5 }));
+let fcIdx = 0, fcKnown = new Set(), fcFlipped = false, fcInit = false;
+let reviewQueue = [], inReviewSession = false;
+
+function initFlashcards() {
+  if (fcInit) return;
+  fcInit = true;
+  renderFC();
+  // Poll every 30s for newly-due cards
+  setInterval(checkDueCards, 30000);
+}
+
+function renderFC() {
+  const c = cards[fcIdx];
+  document.getElementById('fc-term').textContent = c.term;
+  document.getElementById('fc-def').textContent = c.def;
+  document.getElementById('fc-counter').textContent = (fcIdx + 1) + ' / ' + cards.length;
+
+  // Reset flip
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  fcFlipped = false;
+
+  // Highlight if this card is due for review
+  const isDue = srState[fcIdx].nextDue && Date.now() >= srState[fcIdx].nextDue;
+  fc.classList.toggle('fc-card-due', isDue);
+  const hint = document.getElementById('fc-hint-front');
+  if (hint) hint.textContent = isDue ? '🔔 Review due — tap to test yourself' : 'Tap to reveal definition';
+
+  // Show basic buttons, hide SR rating until card is flipped
+  document.getElementById('fc-sr-panel').style.display = 'none';
+  document.getElementById('fc-basic-panel').style.display = 'block';
+
+  updateSRLabels();
+  updateMastery();
+}
+
+function updateSRLabels() {
+  const state = srState[fcIdx];
+  const buckets = [0, state.intervalIdx, Math.min(state.intervalIdx + 1, SR_INTERVALS.length - 1)];
+  [0,1,2].forEach(i => {
+    const el = document.getElementById('sr-lbl-' + i);
+    if (el) el.textContent = SR_LABELS[buckets[i]];
+  });
+}
+
+function flipCard() {
+  fcFlipped = !fcFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', fcFlipped);
+  // After revealing definition, switch to SR rating buttons
+  if (fcFlipped) {
+    document.getElementById('fc-sr-panel').style.display = 'block';
+    document.getElementById('fc-basic-panel').style.display = 'none';
+  } else {
+    document.getElementById('fc-sr-panel').style.display = 'none';
+    document.getElementById('fc-basic-panel').style.display = 'block';
+  }
+}
+
+// Spaced repetition rating: 0=Again, 1=Hard, 2=Easy
+function rateSR(rating) {
+  const state = srState[fcIdx];
+  if (rating === 0) {
+    // Again: reset to shortest interval, ease penalty
+    state.intervalIdx = 0;
+    state.ease = Math.max(1.3, state.ease - 0.2);
+    // Remove from known if it was marked
+    fcKnown.delete(fcIdx);
+  } else if (rating === 1) {
+    // Hard: keep same interval bucket, small ease drop, but still schedule next due
+    state.ease = Math.max(1.3, state.ease - 0.15);
+    // intervalIdx stays the same — no advancement
+  } else {
+    // Easy: advance interval, ease bonus, award XP first time
+    state.intervalIdx = Math.min(state.intervalIdx + 1, SR_INTERVALS.length - 1);
+    state.ease = Math.min(3.0, state.ease + 0.1);
+    if (!fcKnown.has(fcIdx)) {
+      fcKnown.add(fcIdx);
+      addXP(5, 'Mastered: ' + cards[fcIdx].term);
+    }
+  }
+  // Schedule next due time
+  state.nextDue = Date.now() + SR_INTERVALS[state.intervalIdx];
+
+  updateMastery();
+  updateSRLabels();
+  checkDueCards();
+
+  // If in a review session, pull next due card from queue
+  if (inReviewSession && reviewQueue.length > 0) {
+    fcIdx = reviewQueue.shift();
+    if (reviewQueue.length === 0) inReviewSession = false;
+    renderFC();
+  } else {
+    inReviewSession = false;
+    fcNext();
+  }
+}
+
+function fcNext() { fcIdx = (fcIdx + 1) % cards.length; renderFC(); }
+function fcPrev() { fcIdx = (fcIdx - 1 + cards.length) % cards.length; renderFC(); }
+
+// Legacy quick-mark buttons (before card is flipped)
+function fcKnow() {
+  if (!fcKnown.has(fcIdx)) {
+    fcKnown.add(fcIdx);
+    // Schedule for review tomorrow
+    srState[fcIdx].nextDue = Date.now() + SR_INTERVALS[2];
+    srState[fcIdx].intervalIdx = 2;
+    updateMastery();
+    addXP(5, 'Mastered: ' + cards[fcIdx].term);
+    checkDueCards();
+  }
+  fcNext();
+}
+function fcReview() {
+  // Schedule a 1-minute review reminder
+  srState[fcIdx].nextDue = Date.now() + SR_INTERVALS[0];
+  srState[fcIdx].intervalIdx = 0;
+  fcKnown.delete(fcIdx);
+  updateMastery();
+  checkDueCards();
+  fcNext();
+}
+
+// Check which cards are now due — update nav badge and banner
+function checkDueCards() {
+  const now = Date.now();
+  const dueCount = srState.filter(s => s.nextDue !== null && now >= s.nextDue).length;
+
+  const badge = document.getElementById('nav-metrics-badge');
+  const banner = document.getElementById('fc-due-banner');
+  const countEl = document.getElementById('fc-due-count');
+
+  if (badge) { badge.textContent = dueCount; badge.classList.toggle('show', dueCount > 0); }
+  if (countEl) countEl.textContent = dueCount;
+  if (banner) banner.classList.toggle('show', dueCount > 0);
+}
+
+// Jump into a focused review session of all currently-due cards
+function startReviewSession() {
+  const now = Date.now();
+  reviewQueue = srState
+    .map((s, i) => ({ i, s }))
+    .filter(({ s }) => s.nextDue !== null && now >= s.nextDue)
+    .map(({ i }) => i);
+  if (reviewQueue.length === 0) return;
+  inReviewSession = true;
+  fcIdx = reviewQueue.shift();
+  renderFC();
+  document.querySelector('.flashcard-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  addXP(5, 'Review Session Started!');
+}
+
+function updateMastery() {
+  const pct = Math.round((fcKnown.size / cards.length) * 100);
+  document.getElementById('fc-mastery-fill').style.width = pct + '%';
+  document.getElementById('fc-mastery-label').textContent = pct + '% mastered (' + fcKnown.size + '/' + cards.length + ')';
+}
+
+// ─────────────────────────────────
+// PERFORMANCE LOG
+// ─────────────────────────────────
+const logNames = ['SaaS Founders Q1','HR Director Push','VP Sales Wave','CTO Nurture','CMO Blitz','Ops Mgr Series'];
+const logStatus = [['Scaling','status-scale'],['Optimizing','status-opt'],['Paused','status-pause']];
+const logMonths = ['Jan','Feb','Mar','Apr','May','Jun'];
+
+function renderLog() {
+  const grid = document.getElementById('log-grid');
+  const heads = Array.from(grid.querySelectorAll('.log-head')).map(h => h.cloneNode(true));
+  grid.innerHTML = '';
+  heads.forEach(h => grid.appendChild(h));
+  for (let i = 0; i < 6; i++) {
+    const st = logStatus[Math.floor(Math.random() * 3)];
+    const alt = i % 2 !== 0 ? ' log-cell-alt' : '';
+    const vals = [
+      logMonths[i] + ' ' + rand(1,28),
+      logNames[i],
+      rand(30,65) + '%',
+      rand(5,20),
+      rand(1,8),
+      `<span class="status-badge ${st[1]}">${st[0]}</span>`
+    ];
+    vals.forEach(v => {
+      const cell = document.createElement('div');
+      cell.className = 'log-cell' + alt;
+      cell.innerHTML = v;
+      grid.appendChild(cell);
+    });
+  }
+}
+
+// ─────────────────────────────────
+// INIT
+// ─────────────────────────────────
+buildLearnCards();
+buildScenarios();
+
+// PWA SW
+if ('serviceWorker' in navigator) {
+  const sw = `const C='b2b-v2';self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request))));`;
+  navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw],{type:'application/javascript'}))).catch(()=>{});
+}
+</script>
+</body>
+</html>
